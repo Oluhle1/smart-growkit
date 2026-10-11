@@ -1,0 +1,40 @@
+# GrowKit handover — next chat
+
+Date: 12 Sep 2026
+Firmware owner: me. Hardware: Oluhle. Review: Collen amykelani@innovate.durban
+
+## Source of truth
+Repo: https://github.com/Oluhle1/smart-growkit
+Tag: v0.6.1-poc (e6f4dea)
+Open firmware/ in VS Code. Pins: firmware/src/pins.h
+ESP32 CP2102, PlatformIO esp32dev, 115200. Power 12 V not 24 V.
+
+## Frozen 0.6.1
+SAFE boot all outputs OFF. NVS clock. SoftAP GrowKit-PoC.
+AUTO: light 06:00–22:00 (needs clock), pump 15/45, low-water lockout.
+MANUAL: pump/light/fan, Dose A/B 500 ms max 2000, settle 15 min.
+Heater compiled off. Auto-dose off. Dose C off. SGK_BENCH_SIM=0.
+
+## Pins
+LED 2; DHT 32; pH 33; US 25/26; MAX6675 5/18/19; CO2 34
+Relays pump/light/heat/fan 23/22/21/17 (ON=LOW)
+Dose A 27/14; Dose B 16/4; Dose C unused
+Never GPIO 1, 3, 12, 15 as outputs.
+
+## Decisions
+Edge control on ESP32. No paid cloud. MQTT later = local Mosquitto.
+Auto-pH only after cup-test ml/s. Grok preview is NOT the firmware.
+
+## Not done
+Flash, pH/ultrasonic cal, auto-pH, STA+MQTT.
+
+## Monday
+USB no 12 V → flash 0.6.1 → GrowKit-PoC → 12 V light/fan → bucket level → 500 ms dose cup → pump last.
+
+## Next jobs (one at a time)
+1. Prove 0.6.1 on hardware
+2. Calibrate sensors
+3. Auto-dose FSM flag default off
+4. STA + MQTT publish, control stays on chip
+
+Next Grok: do not start from scratch. One job: [fill in].
